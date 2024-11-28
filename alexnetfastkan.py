@@ -35,35 +35,40 @@ class AlexNetKAN(nn.Module):
     def __init__(self):
         super().__init__()
         self.features = nn.Sequential(
+
             # nn.Conv2d(3, 32, kernel_size=11, stride=4, padding=2),
             # nn.ReLU(inplace=True),
             FastKANConv2DLayer(3, 32, padding=2, kernel_size=11, stride=4),
-            #LayerNorm2D(32),
+            LayerNorm2D(32),
             nn.MaxPool2d(kernel_size=3, stride=2),
+
             # nn.Conv2d(64, 192, kernel_size=5, padding=2),
             # nn.ReLU(inplace=True),
             FastKANConv2DLayer(32, 96, kernel_size=5, padding=2),
-            #LayerNorm2D(96),
+            LayerNorm2D(96),
             nn.MaxPool2d(kernel_size=3, stride=2),
+
             # nn.Conv2d(192, 384, kernel_size=3, padding=1),
             # nn.ReLU(inplace=True),
             FastKANConv2DLayer(96, 172, kernel_size=3, padding=1),
             LayerNorm2D(172),
+
             # nn.Conv2d(384, 256, kernel_size=3, padding=1),
             # nn.ReLU(inplace=True),
             FastKANConv2DLayer(172, 128, kernel_size=3, padding=1),
-            #LayerNorm2D(128),
+            LayerNorm2D(128),
+
             # nn.Conv2d(256, 256, kernel_size=3, padding=1),
             # nn.ReLU(inplace=True),
             FastKANConv2DLayer(128, 128, kernel_size=3, padding=1),
-            #LayerNorm2D(128),
+            LayerNorm2D(128),
             nn.MaxPool2d(kernel_size=3, stride=2),
         )
         self.classifier = nn.Sequential(
-            nn.Dropout(),
+            nn.Dropout(p=0.5),
             nn.Linear(128 * 6 * 6, 4096),
             nn.ReLU(inplace=True),
-            nn.Dropout(),
+            nn.Dropout(p=0.5),
             nn.Linear(4096, 4096),
             nn.ReLU(inplace=True),
             nn.Linear(4096, 1000),
@@ -106,6 +111,12 @@ class Trainer:
         self.accumulation_steps = accumulation_steps
         self.current_step= 0
         self.scaler = amp.GradScaler()
+
+        self.scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(
+            self.optimizer, 
+            T_max=max_epochs,
+            eta_min=1e-6  # Minimum learning rate
+        )
         
         if os.path.exists(snapshot_path):
             print("Loading snapshot")
@@ -116,13 +127,17 @@ class Trainer:
         loc = f"cuda:{self.gpu_id}"
         snapshot = torch.load(self.snapshot_path, map_location=loc)
         self.model.load_state_dict(snapshot['MODEL_STATE'])
-        self.epochs_run = snapshot["EPOCHS_RUN"] 
+        self.optimizer.load_state_dict(snapshot['OPTIMIZER_STATE'])
+        self.scheduler.load_state_dict(snapshot['SCHEDULER_STATE'])
+        self.epochs_run = snapshot["EPOCHS_RUN"]
         self.hist = snapshot["HIST"]
         print(f"Snapshot loaded at epoch : {self.epochs_run}")
 
     def _save_snapshot(self, epoch):
         snapshot = {
             "MODEL_STATE": self.model.state_dict(),
+            "OPTIMIZER_STATE": self.optimizer.state_dict(),
+            "SCHEDULER_STATE": self.scheduler.state_dict(),
             "EPOCHS_RUN": epoch,
             "HIST": self.hist
         }
@@ -130,27 +145,31 @@ class Trainer:
         print(f"Epoch {epoch} | Training snapshot saved at {self.snapshot_path}")
 
     def _run_batch_and_get_loss(self, source, targets):
-        with amp.autocast():
+        with amp.autocast(device_type="cuda", dtype=torch.float16):
             loss = self.get_loss((source, targets))
             loss = loss / self.accumulation_steps
-
+        # torch.cuda.synchronize()
         self.scaler.scale(loss).backward()
-        torch.cuda.synchronize()
 
         if (self.current_step + 1) % (self.accumulation_steps) == 0:
+            self.scaler.unscale_(optimizer)
             self.scaler.step(self.optimizer)
             self.scaler.update()
             self.optimizer.zero_grad()
 
         self.current_step+=1
-        return loss
+        return loss * self.accumulation_steps
 
     def _run_epoch_and_get_loss(self, epoch):
         self.model.train()
         self.current_step = 0
+
         b_sz = len(next(iter(self.train_data))[0])
-        print(f"[GPU{self.gpu_id}] Epoch {epoch}"
-                f"| Batchsize: {b_sz} | Steps: {len(self.train_data)}")
+
+        print(f"[GPU{self.gpu_id}] Epoch {epoch} | "
+              f"Batchsize: {b_sz} | Steps: {len(self.train_data)} | "
+              f"LR: {self.optimizer.param_groups[0]['lr']:.6f}")
+
         self.train_data.sampler.set_epoch(epoch)
         train_loss = []
         for source, targets in self.train_data:
@@ -197,20 +216,24 @@ class Trainer:
 
     @staticmethod
     def log_epoch( e, epoch, res):
-        
-        print('[{} / {}] epoch/s, training loss is {:.4f} validation loss is {:.4f}, validation accuracy is {:.4f} '\
-              .format(e+1,epoch,
+        print('[{} / {}] epoch/s, LR: {:.6f}, training loss: {:.4f}, validation loss: {:.4f}, validation accuracy: {:.4f} '
+              .format(e+1, epoch,
+                      res['learning_rate'],
                       res['train_loss'],
                       res['valid_loss'],                
                       res['valid_acc']
                      )
-             )
+              )
 
     def train(self, max_epochs: int):
         for epoch in range(self.epochs_run, max_epochs):
             train_loss = self._run_epoch_and_get_loss(epoch)
             log_dict = self.validate_and_get_metrics()
             log_dict['train_loss'] = torch.stack(train_loss).mean().item()
+            log_dict['learning_rate'] = self.optimizer.param_groups[0]['lr']
+
+            # Step the scheduler at the end of each epoch
+            self.scheduler.step()
 
             if self.gpu_id == 0 and epoch % self.save_every == 0:
                 self._save_snapshot(epoch)
@@ -220,32 +243,35 @@ class Trainer:
                 self.log_epoch(epoch, max_epochs, log_dict)
 
 
+
 def load_data():
-    # transforms = A.Compose(
-    #     [
-    #         A.RandomResizedCrop(height=224, width=224, scale=(0.7,1), p=1),
-    #         A.HorizontalFlip(p=0.5),
-    #         A.VerticalFlip(p=0.5),
-    #         A.SafeRotate(limit=360, p=1),
-    #         A.RandomBrightnessContrast(p=0.2),
-    #         A.augmentations.transforms.Normalize(
-    #             mean = (0.485,0.456, 0.406),
-    #             std = (0.229, 0.224, 0.224)
-    #             ),
-    #         ToTensorV2(),
-    #     ]
-    # )
-    #
     _transforms = transforms.Compose([
         transforms.RandomResizedCrop(
             size=(224, 224),
-            scale=(0.7, 1.0)
+            scale=(0.08, 1.0),
+            ratio=(3/4,4/3)
         ),
-        transforms.RandomHorizontalFlip(),
-        transforms.RandomVerticalFlip(),
+        transforms.RandomHorizontalFlip(p=0.5),
+        transforms.RandomVerticalFlip(p=0.5),
+
+        transforms.ColorJitter(
+            brightness=0.4,
+            contrast=0.4,
+            saturation=0.4,
+            hue=0.1
+        ),
+        
+        # Lighting noise - simulates variations in lighting conditions
+        transforms.RandomAdjustSharpness(sharpness_factor=1.5, p=0.3),
+        
         transforms.RandomRotation(
-            degrees=90,
+            degrees=32,
             fill=0  # black padding for safe rotation
+            interpolation=transforms.InterpolationMode.BILINEAR
+        ),
+        transforms.RandAugment(
+            num_ops=2,
+            magnitude=9
         ),
         transforms.ToTensor(),
         transforms.Normalize(
@@ -253,6 +279,17 @@ def load_data():
             std=[0.229, 0.224, 0.225]
         ),
     ])
+
+    val_transforms = transforms.Compose([
+        transforms.Resize(256),  # Resize the shorter side to 256
+        transforms.CenterCrop(224),
+        transforms.ToTensor(),
+        transforms.Normalize(
+            mean=[0.485, 0.456, 0.406],
+            std=[0.229, 0.224, 0.225]
+        ),
+    ])
+
     train_ds = datasets.ImageNet(
                             root="./imagenet/train/", 
                             split='train', 
@@ -262,7 +299,7 @@ def load_data():
     val_ds = datasets.ImageNet(
                             root="./imagenet/val/", 
                             split='val', 
-                            transform=_transforms,
+                            transform=val_transforms,
                         )
     # targets = train_ds.targets
     # _, test_train = train_test_split(np.arange(len(targets)), test_size = 0.05, stratify = targets, random_state=42 )
@@ -289,7 +326,7 @@ def prepare_data(dataset, batch_size):
 
 def load_model():
     model = AlexNetKAN()
-    opt = optim.SGD(model.parameters(), lr=0.0001, momentum=0.9)
+    opt = optim.SGD(model.parameters(), lr=0.01, momentum=0.9, weight_decay=1e-4)
     return model, opt
 
 def trainer_agent(epochs:int, save_every:int, snapshot_path:str):
