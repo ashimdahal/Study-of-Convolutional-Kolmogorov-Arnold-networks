@@ -34,11 +34,14 @@ class LeNet5(nn.Module):
         self.fc1 = nn.Linear(120, 84)
         self.relu1 = nn.ReLU()
         self.fc2 = nn.Linear(84, num_classes)
+        self.flat = nn.Flatten()
         
     def forward(self, x):
         out = self.layer1(x)
         out = self.layer2(out)
         out = out.reshape(out.size(0), -1)
+        # out = self.flat(out)
+        # print(out.shape)
         out = self.fc(out)
         out = self.relu(out)
         out = self.fc1(out)
@@ -88,6 +91,7 @@ class Trainer:
         return loss
 
     def _run_epoch_and_get_loss(self, epoch):
+        self.model.train()
         b_sz = len(next(iter(self.train_data))[0])
         print(f"[GPU{self.gpu_id}] Epoch {epoch} | Batchsize: {b_sz} | Steps: {len(self.train_data)}")
         self.train_data.sampler.set_epoch(epoch)
@@ -104,6 +108,7 @@ class Trainer:
         snapshot = {
             "MODEL_STATE": self.model.module.state_dict(),
             "EPOCHS_RUN": epoch,
+            "HIST": self.hist
         }
         torch.save(snapshot, self.snapshot_path)
         print(f"Epoch {epoch} | Training snapshot saved at {self.snapshot_path}")
@@ -155,6 +160,7 @@ class Trainer:
                      )
              )
 
+
     def train(self, max_epochs: int):
         for epoch in range(self.epochs_run, max_epochs):
             train_loss = self._run_epoch_and_get_loss(epoch)
@@ -200,7 +206,7 @@ def trainer_agent(save_every:int, snapshot_path:str, epochs:int):
 
     batch_size = 512 
     train_data = prepare_data(train_ds, batch_size)
-    test_data = prepare_data(test_ds,1024)
+    test_data = prepare_data(test_ds, batch_size * 2)
 
     model, opt  = load_model()
 
@@ -219,4 +225,10 @@ def main():
     trainer_agent(args.save, args.path, args.epochs)
 
 if __name__ == "__main__":
+    import time 
+    start = time.time()
     main()
+    # print(torch.version.cuda)
+    # print(torch.backends.cudnn.version())
+    end = time.time()
+    print(f"time taken to train CNN: {end-start}")

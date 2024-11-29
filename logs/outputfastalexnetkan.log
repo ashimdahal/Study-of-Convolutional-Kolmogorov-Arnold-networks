@@ -1,0 +1,38 @@
+ testing dataset size: 1281167
+ testing validation size: 50000
+ testing dataset size: 1281167
+ testing validation size: 50000
+ testing dataset size: 1281167
+ testing validation size: 50000
+ testing dataset size: 1281167
+ testing validation size: 50000
+[GPU0] Epoch 0| Batchsize: 300 | Steps: 1068
+[GPU2] Epoch 0| Batchsize: 300 | Steps: 1068
+[GPU3] Epoch 0| Batchsize: 300 | Steps: 1068
+[GPU1] Epoch 0| Batchsize: 300 | Steps: 1068
+Epoch 0 | Training snapshot saved at model_snapshots/fastalexnet
+[1 / 90] epoch/s, training loss is 3.4572 validation loss is 6.9093, validation accuracy is 0.0013 
+[GPU2] Epoch 1| Batchsize: 300 | Steps: 1068
+[GPU0] Epoch 1| Batchsize: 300 | Steps: 1068
+[GPU3] Epoch 1| Batchsize: 300 | Steps: 1068
+[GPU1] Epoch 1| Batchsize: 300 | Steps: 1068
+[2 / 90] epoch/s, training loss is 3.4563 validation loss is 6.9089, validation accuracy is 0.0007 
+[GPU2] Epoch 2| Batchsize: 300 | Steps: 1068
+[GPU3] Epoch 2| Batchsize: 300 | Steps: 1068
+[GPU0] Epoch 2| Batchsize: 300 | Steps: 1068
+[GPU1] Epoch 2| Batchsize: 300 | Steps: 1068
+[3 / 90] epoch/s, training loss is 3.4557 validation loss is 6.9086, validation accuracy is 0.0007 
+[GPU2] Epoch 3| Batchsize: 300 | Steps: 1068
+[GPU0] Epoch 3| Batchsize: 300 | Steps: 1068
+[GPU3] Epoch 3| Batchsize: 300 | Steps: 1068
+[GPU1] Epoch 3| Batchsize: 300 | Steps: 1068
+[4 / 90] epoch/s, training loss is 3.4553 validation loss is 6.9081, validation accuracy is 0.0012 
+[GPU2] Epoch 4| Batchsize: 300 | Steps: 1068
+[GPU0] Epoch 4| Batchsize: 300 | Steps: 1068
+[GPU3] Epoch 4| Batchsize: 300 | Steps: 1068
+[GPU1] Epoch 4| Batchsize: 300 | Steps: 1068
+[5 / 90] epoch/s, training loss is 3.4550 validation loss is 6.9079, validation accuracy is 0.0007 
+[GPU0] Epoch 5| Batchsize: 300 | Steps: 1068
+[GPU2] Epoch 5| Batchsize: 300 | Steps: 1068
+[GPU3] Epoch 5| Batchsize: 300 | Steps: 1068
+[GPU1] Epoch 5| Batchsize: 300 | Steps: 1068
