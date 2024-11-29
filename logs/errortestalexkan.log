@@ -1,0 +1,17 @@
+/homes/01/axdahal/miniconda3/envs/torch/lib/python3.8/site-packages/albumentations/__init__.py:13: UserWarning: A new version of Albumentations is available: 1.4.21 (you have 1.4.18). Upgrade using: pip install -U albumentations. To disable automatic update checks, set the environment variable NO_ALBUMENTATIONS_UPDATE to 1.
+  check_for_updates()
+Unsupported operator aten::max_pool2d encountered 2 time(s)
+The following submodules of the model were never called during the trace of the graph. They may be unused, or they were accessed by direct calls to .forward() or via other python methods. In the latter case they will have zeros for statistics, though their statistics will still contribute to their parent calling module.
+flat
+Unsupported operator aten::silu encountered 2 time(s)
+Unsupported operator aten::sub encountered 2 time(s)
+Unsupported operator aten::div encountered 2 time(s)
+Unsupported operator aten::pow encountered 2 time(s)
+Unsupported operator aten::neg encountered 2 time(s)
+Unsupported operator aten::exp encountered 2 time(s)
+Unsupported operator aten::movedim encountered 2 time(s)
+Unsupported operator aten::add encountered 2 time(s)
+Unsupported operator aten::clone encountered 2 time(s)
+Unsupported operator aten::max_pool2d encountered 2 time(s)
+The following submodules of the model were never called during the trace of the graph. They may be unused, or they were accessed by direct calls to .forward() or via other python methods. In the latter case they will have zeros for statistics, though their statistics will still contribute to their parent calling module.
+flat

@@ -1,46 +1,82 @@
-flops: 1611568352
+Printing Results for LeNet
+flops: 429128
+Time taken for LeNet inference: 0.0007107257843017578s
 ----------------------------------------------------------------
         Layer (type)               Output Shape         Param #
 ================================================================
-              SiLU-1            [-1, 7200, 363]               0
-         KANLinear-2             [-1, 7200, 32]               0
-           ConvKAN-3           [-1, 32, 60, 60]               0
-       LayerNorm2D-4           [-1, 32, 60, 60]               0
-         MaxPool2d-5           [-1, 32, 29, 29]               0
-              SiLU-6            [-1, 1682, 800]               0
-         KANLinear-7             [-1, 1682, 96]               0
-           ConvKAN-8           [-1, 96, 29, 29]               0
-       LayerNorm2D-9           [-1, 96, 29, 29]               0
-        MaxPool2d-10           [-1, 96, 14, 14]               0
-             SiLU-11             [-1, 392, 864]               0
-        KANLinear-12             [-1, 392, 172]               0
-          ConvKAN-13          [-1, 172, 14, 14]               0
-      LayerNorm2D-14          [-1, 172, 14, 14]               0
-             SiLU-15            [-1, 392, 1548]               0
-        KANLinear-16             [-1, 392, 128]               0
-          ConvKAN-17          [-1, 128, 14, 14]               0
-      LayerNorm2D-18          [-1, 128, 14, 14]               0
-             SiLU-19            [-1, 392, 1152]               0
-        KANLinear-20             [-1, 392, 128]               0
-          ConvKAN-21          [-1, 128, 14, 14]               0
-      LayerNorm2D-22          [-1, 128, 14, 14]               0
-        MaxPool2d-23            [-1, 128, 6, 6]               0
-          Flatten-24                 [-1, 4608]               0
-          Dropout-25                 [-1, 4608]               0
-           Linear-26                 [-1, 4096]      18,878,464
-             ReLU-27                 [-1, 4096]               0
-          Dropout-28                 [-1, 4096]               0
-           Linear-29                 [-1, 4096]      16,781,312
-             ReLU-30                 [-1, 4096]               0
-           Linear-31                 [-1, 1000]       4,097,000
+            Conv2d-1            [-1, 6, 28, 28]             156
+       BatchNorm2d-2            [-1, 6, 28, 28]              12
+              ReLU-3            [-1, 6, 28, 28]               0
+         MaxPool2d-4            [-1, 6, 14, 14]               0
+            Conv2d-5           [-1, 16, 10, 10]           2,416
+       BatchNorm2d-6           [-1, 16, 10, 10]              32
+              ReLU-7           [-1, 16, 10, 10]               0
+         MaxPool2d-8             [-1, 16, 5, 5]               0
+            Linear-9                  [-1, 120]          48,120
+             ReLU-10                  [-1, 120]               0
+           Linear-11                   [-1, 84]          10,164
+             ReLU-12                   [-1, 84]               0
+           Linear-13                   [-1, 10]             850
 ================================================================
-Total params: 39,756,776
-Trainable params: 39,756,776
+Total params: 61,750
+Trainable params: 61,750
 Non-trainable params: 0
 ----------------------------------------------------------------
-Input size (MB): 0.68
-Forward/backward pass size (MB): 50.02
-Params size (MB): 151.66
-Estimated Total Size (MB): 202.36
+Input size (MB): 0.00
+Forward/backward pass size (MB): 0.16
+Params size (MB): 0.24
+Estimated Total Size (MB): 0.40
 ----------------------------------------------------------------
 None
+ length of testing data 10000
+printed
+printed
+computing outputs
+report saved
+****************************************************************************************************
+Printing Results for LeNet KAN
+flops: 3298728
+Time taken for LeNet KAN inference: 0.0036013126373291016s
+----------------------------------------------------------------
+        Layer (type)               Output Shape         Param #
+================================================================
+              SiLU-1            [-1, 1, 32, 32]               0
+            Conv2d-2            [-1, 6, 28, 28]             150
+    InstanceNorm2d-3            [-1, 1, 32, 32]               0
+RadialBasisFunction-4         [-1, 1, 32, 32, 8]               0
+            Conv2d-5            [-1, 6, 28, 28]           1,200
+FastKANConv2DLayer-6            [-1, 6, 28, 28]               0
+       BatchNorm2d-7            [-1, 6, 28, 28]              12
+              ReLU-8            [-1, 6, 28, 28]               0
+         MaxPool2d-9            [-1, 6, 14, 14]               0
+             SiLU-10            [-1, 6, 14, 14]               0
+           Conv2d-11           [-1, 16, 10, 10]           2,400
+   InstanceNorm2d-12            [-1, 6, 14, 14]               0
+RadialBasisFunction-13         [-1, 6, 14, 14, 8]               0
+           Conv2d-14           [-1, 16, 10, 10]          19,200
+FastKANConv2DLayer-15           [-1, 16, 10, 10]               0
+      BatchNorm2d-16           [-1, 16, 10, 10]              32
+             ReLU-17           [-1, 16, 10, 10]               0
+        MaxPool2d-18             [-1, 16, 5, 5]               0
+           Linear-19                  [-1, 120]          48,120
+             ReLU-20                  [-1, 120]               0
+           Linear-21                   [-1, 84]          10,164
+             ReLU-22                   [-1, 84]               0
+           Linear-23                   [-1, 10]             850
+================================================================
+Total params: 82,128
+Trainable params: 82,128
+Non-trainable params: 0
+----------------------------------------------------------------
+Input size (MB): 0.00
+Forward/backward pass size (MB): 0.42
+Params size (MB): 0.31
+Estimated Total Size (MB): 0.74
+----------------------------------------------------------------
+None
+ length of testing data 10000
+printed
+printed
+computing outputs
+report saved
+****************************************************************************************************
