@@ -1,4 +1,3 @@
-
 import os
 import torch
 import torch.nn as nn
@@ -9,10 +8,7 @@ from torch.utils.data import DataLoader, DistributedSampler
 import torch.distributed as dist
 from torch.nn.parallel import DistributedDataParallel as DDP
 #KAN Convolution
-# from kan_convolutional.KANConv import KAN_Convolutional_Layer
-
-from convkan import ConvKAN, LayerNorm2D
-from kan_convs import FastKANConv2DLayer
+from kan_convolutional.KANConv import KAN_Convolutional_Layer
 
 def setup():
     dist.init_process_group(backend='nccl')
@@ -23,18 +19,20 @@ def cleanup():
 
 
 class LeNet5_KAN(nn.Module):
-    def __init__(self, num_classes=10):
-        super().__init__()
+    def __init__(self, num_classes):
+        super(LeNet5_KAN, self).__init__()
         self.layer1 = nn.Sequential(
-            FastKANConv2DLayer(1, 6, kernel_size=5, stride=1, padding=0),
-            nn.BatchNorm2d(6),
+            KAN_Convolutional_Layer(n_convs=4, kernel_size=(5,5), stride=(1,1), padding=(0,0)),
+            nn.BatchNorm2d(4),
             nn.ReLU(),
-            nn.MaxPool2d(kernel_size = 2, stride = 2))
+            nn.MaxPool2d(kernel_size=2, stride=2)
+        )
         self.layer2 = nn.Sequential(
-            FastKANConv2DLayer(6,16 , kernel_size=5, stride=1, padding=0),
-            nn.BatchNorm2d(16),
+            KAN_Convolutional_Layer(n_convs=4, kernel_size=(5,5), stride=(1,1), padding=(0,0)),
+            # nn.BatchNorm2d(16),
             nn.ReLU(),
-            nn.MaxPool2d(kernel_size = 2, stride = 2))
+            nn.MaxPool2d(kernel_size=2, stride=2)
+        )
         self.fc = nn.Linear(400, 120)
         self.relu = nn.ReLU()
         self.fc1 = nn.Linear(120, 84)
@@ -45,8 +43,8 @@ class LeNet5_KAN(nn.Module):
     def forward(self, x):
         out = self.layer1(x)
         out = self.layer2(out)
-        out = out.reshape(out.size(0), -1)
-        # out = self.flat(out)
+        out = self.flat(out)
+        # out = out.reshape(out.size(0), -1)
         # print(out.shape)
         out = self.fc(out)
         out = self.relu(out)
@@ -54,6 +52,7 @@ class LeNet5_KAN(nn.Module):
         out = self.relu1(out)
         out = self.fc2(out)
         return out
+
 
 class Trainer:
     def __init__(
@@ -96,7 +95,6 @@ class Trainer:
         return loss
 
     def _run_epoch_and_get_loss(self, epoch):
-        self.model.train()
         b_sz = len(next(iter(self.train_data))[0])
         print(f"[GPU{self.gpu_id}] Epoch {epoch} | Batchsize: {b_sz} | Steps: {len(self.train_data)}")
         self.train_data.sampler.set_epoch(epoch)
@@ -209,9 +207,9 @@ def trainer_agent(save_every:int, snapshot_path:str, epochs:int):
 
     train_ds, test_ds = load_data()
 
-    batch_size = 512 
+    batch_size = 256 
     train_data = prepare_data(train_ds, batch_size)
-    test_data = prepare_data(test_ds, batch_size * 2)
+    test_data = prepare_data(test_ds,512)
 
     model, opt  = load_model()
 
