@@ -114,7 +114,7 @@ class Trainer:
 
         self.scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(
             self.optimizer, 
-            T_max=max_epochs,
+            T_max=100,
             eta_min=1e-6  # Minimum learning rate
         )
         
@@ -177,6 +177,8 @@ class Trainer:
             targets = targets.to(self.gpu_id)
             loss = self._run_batch_and_get_loss(source, targets)
             train_loss.append(loss)
+
+        self.scheduler.step()
 
         return train_loss
 
@@ -266,7 +268,7 @@ def load_data():
         
         transforms.RandomRotation(
             degrees=32,
-            fill=0  # black padding for safe rotation
+            fill=0,  # black padding for safe rotation
             interpolation=transforms.InterpolationMode.BILINEAR
         ),
         transforms.RandAugment(
