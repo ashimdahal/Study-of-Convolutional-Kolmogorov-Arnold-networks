@@ -32,57 +32,41 @@ def cleanup():
 
 
 class AlexNetKAN(nn.Module):
-    def __init__(self):
+    def __init__(self, num_classes=1000):
         super().__init__()
+        
         self.features = nn.Sequential(
-
-            # nn.Conv2d(3, 32, kernel_size=11, stride=4, padding=2),
-            # nn.ReLU(inplace=True),
-            FastKANConv2DLayer(3, 32, padding=2, kernel_size=11, stride=4),
-            LayerNorm2D(32),
+            FastKANConv2DLayer(3, 24, kernel_size=11, stride=4, padding=0),
+            LayerNorm2D(24),
             nn.MaxPool2d(kernel_size=3, stride=2),
-
-            # nn.Conv2d(64, 192, kernel_size=5, padding=2),
-            # nn.ReLU(inplace=True),
-            FastKANConv2DLayer(32, 96, kernel_size=5, padding=2),
-            LayerNorm2D(96),
+            
+            FastKANConv2DLayer(24, 64, kernel_size=5, padding=2, groups=2),
+            LayerNorm2D(64),
             nn.MaxPool2d(kernel_size=3, stride=2),
-
-            # nn.Conv2d(192, 384, kernel_size=3, padding=1),
-            # nn.ReLU(inplace=True),
-            FastKANConv2DLayer(96, 172, kernel_size=3, padding=1),
-            LayerNorm2D(172),
-
-            # nn.Conv2d(384, 256, kernel_size=3, padding=1),
-            # nn.ReLU(inplace=True),
-            FastKANConv2DLayer(172, 128, kernel_size=3, padding=1),
-            LayerNorm2D(128),
-
-            # nn.Conv2d(256, 256, kernel_size=3, padding=1),
-            # nn.ReLU(inplace=True),
-            FastKANConv2DLayer(128, 128, kernel_size=3, padding=1),
-            LayerNorm2D(128),
+            
+            FastKANConv2DLayer(64, 96, kernel_size=3, padding=1),
+            
+            FastKANConv2DLayer(96, 96, kernel_size=3, padding=1, groups=2),
+            
+            FastKANConv2DLayer(96, 64, kernel_size=3, padding=1, groups=2),
             nn.MaxPool2d(kernel_size=3, stride=2),
         )
+
         self.classifier = nn.Sequential(
-            nn.Dropout(p=0.5),
-            nn.Linear(128 * 6 * 6, 4096),
+            nn.Linear(64 * 6 * 6, 1024),
             nn.ReLU(inplace=True),
             nn.Dropout(p=0.5),
-            nn.Linear(4096, 4096),
+            nn.Linear(1024, 1024),
             nn.ReLU(inplace=True),
-            nn.Linear(4096, 1000),
+            nn.Dropout(p=0.5),
+            nn.Linear(1024, num_classes),
         )
-
-        self.flat = nn.Flatten()
 
     def forward(self, x):
         x = self.features(x)
-        # x = x.view(x.size(0), 128*6*6)
-        x = self.flat(x)
+        x = torch.flatten(x, 1)
         x = self.classifier(x)
         return x
-
 
 class Trainer:
     def __init__(
@@ -145,14 +129,14 @@ class Trainer:
         print(f"Epoch {epoch} | Training snapshot saved at {self.snapshot_path}")
 
     def _run_batch_and_get_loss(self, source, targets):
-        with amp.autocast(device_type="cuda", dtype=torch.float16):
+        with amp.autocast(dtype=torch.float16):
             loss = self.get_loss((source, targets))
             loss = loss / self.accumulation_steps
         # torch.cuda.synchronize()
         self.scaler.scale(loss).backward()
 
         if (self.current_step + 1) % (self.accumulation_steps) == 0:
-            self.scaler.unscale_(optimizer)
+            self.scaler.unscale_(self.optimizer)
             self.scaler.step(self.optimizer)
             self.scaler.update()
             self.optimizer.zero_grad()
@@ -249,7 +233,7 @@ class Trainer:
 def load_data():
     _transforms = transforms.Compose([
         transforms.RandomResizedCrop(
-            size=(224, 224),
+            size=(227,227),
             scale=(0.08, 1.0),
             ratio=(3/4,4/3)
         ),
@@ -284,7 +268,7 @@ def load_data():
 
     val_transforms = transforms.Compose([
         transforms.Resize(256),  # Resize the shorter side to 256
-        transforms.CenterCrop(224),
+        transforms.CenterCrop(227),
         transforms.ToTensor(),
         transforms.Normalize(
             mean=[0.485, 0.456, 0.406],
@@ -328,14 +312,14 @@ def prepare_data(dataset, batch_size):
 
 def load_model():
     model = AlexNetKAN()
-    opt = optim.SGD(model.parameters(), lr=0.01, momentum=0.9, weight_decay=1e-4)
+    opt = optim.Adam(model.parameters(), lr=0.0001, weight_decay=1e-4)
     return model, opt
 
 def trainer_agent(epochs:int, save_every:int, snapshot_path:str):
     setup()
     train_data, val_data = load_data()
 
-    batch_size = 300 
+    batch_size = 512 
     train_dl = prepare_data(train_data, batch_size)
     val_dl = prepare_data(val_data, batch_size * 2)
 
