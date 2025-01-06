@@ -319,7 +319,7 @@ def trainer_agent(epochs:int, save_every:int, snapshot_path:str):
     setup()
     train_data, val_data = load_data()
 
-    batch_size = 512 
+    batch_size = 300 
     train_dl = prepare_data(train_data, batch_size)
     val_dl = prepare_data(val_data, batch_size * 2)
 
