@@ -120,3 +120,28 @@ Epoch 35 | Training snapshot saved at model_snapshots/fastalexnet
 [36 / 90] epoch/s, LR: 0.000020, training loss: 4.9123, validation loss: 4.2190, validation accuracy: 0.1856 
 [GPU0] Epoch 36 | Batchsize: 300 | Steps: 2136 | LR: 0.000019
 [GPU1] Epoch 36 | Batchsize: 300 | Steps: 2136 | LR: 0.000019
+[37 / 90] epoch/s, LR: 0.000018, training loss: 4.9035, validation loss: 4.2094, validation accuracy: 0.1881 
+[GPU0] Epoch 37 | Batchsize: 300 | Steps: 2136 | LR: 0.000017
+[GPU1] Epoch 37 | Batchsize: 300 | Steps: 2136 | LR: 0.000017
+[38 / 90] epoch/s, LR: 0.000015, training loss: 4.8992, validation loss: 4.2029, validation accuracy: 0.1889 
+[GPU1] Epoch 38 | Batchsize: 300 | Steps: 2136 | LR: 0.000014
+[GPU0] Epoch 38 | Batchsize: 300 | Steps: 2136 | LR: 0.000014
+[39 / 90] epoch/s, LR: 0.000013, training loss: 4.8950, validation loss: 4.1897, validation accuracy: 0.1910 
+[GPU1] Epoch 39 | Batchsize: 300 | Steps: 2136 | LR: 0.000012
+[GPU0] Epoch 39 | Batchsize: 300 | Steps: 2136 | LR: 0.000012
+[40 / 90] epoch/s, LR: 0.000011, training loss: 4.8853, validation loss: 4.1936, validation accuracy: 0.1895 
+[GPU0] Epoch 40 | Batchsize: 300 | Steps: 2136 | LR: 0.000010
+[GPU1] Epoch 40 | Batchsize: 300 | Steps: 2136 | LR: 0.000010
+Epoch 40 | Training snapshot saved at model_snapshots/fastalexnet
+[41 / 90] epoch/s, LR: 0.000010, training loss: 4.8779, validation loss: 4.1818, validation accuracy: 0.1902 
+[GPU0] Epoch 41 | Batchsize: 300 | Steps: 2136 | LR: 0.000009
+[GPU1] Epoch 41 | Batchsize: 300 | Steps: 2136 | LR: 0.000009
+[42 / 90] epoch/s, LR: 0.000008, training loss: 4.8777, validation loss: 4.1773, validation accuracy: 0.1935 
+[GPU0] Epoch 42 | Batchsize: 300 | Steps: 2136 | LR: 0.000007
+[GPU1] Epoch 42 | Batchsize: 300 | Steps: 2136 | LR: 0.000007
+[43 / 90] epoch/s, LR: 0.000006, training loss: 4.8743, validation loss: 4.1776, validation accuracy: 0.1893 
+[GPU0] Epoch 43 | Batchsize: 300 | Steps: 2136 | LR: 0.000006
+[GPU1] Epoch 43 | Batchsize: 300 | Steps: 2136 | LR: 0.000006
+[44 / 90] epoch/s, LR: 0.000005, training loss: 4.8699, validation loss: 4.1772, validation accuracy: 0.1922 
+[GPU0] Epoch 44 | Batchsize: 300 | Steps: 2136 | LR: 0.000004
+[GPU1] Epoch 44 | Batchsize: 300 | Steps: 2136 | LR: 0.000004
