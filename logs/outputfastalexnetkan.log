@@ -2,165 +2,110 @@
  testing validation size: 50000
  testing dataset size: 1281167
  testing validation size: 50000
-[GPU0] Epoch 0 | Batchsize: 300 | Steps: 2136 | LR: 0.000100
-[GPU1] Epoch 0 | Batchsize: 300 | Steps: 2136 | LR: 0.000100
-Epoch 0 | Training snapshot saved at model_snapshots/fastalexnet
-[1 / 90] epoch/s, LR: 0.000100, training loss: 6.6999, validation loss: 6.2016, validation accuracy: 0.0181 
-[GPU0] Epoch 1 | Batchsize: 300 | Steps: 2136 | LR: 0.000100
-[GPU1] Epoch 1 | Batchsize: 300 | Steps: 2136 | LR: 0.000100
-[2 / 90] epoch/s, LR: 0.000100, training loss: 6.2746, validation loss: 5.7803, validation accuracy: 0.0359 
-[GPU1] Epoch 2 | Batchsize: 300 | Steps: 2136 | LR: 0.000100
-[GPU0] Epoch 2 | Batchsize: 300 | Steps: 2136 | LR: 0.000100
-[3 / 90] epoch/s, LR: 0.000099, training loss: 6.0382, validation loss: 5.5850, validation accuracy: 0.0496 
-[GPU1] Epoch 3 | Batchsize: 300 | Steps: 2136 | LR: 0.000099
-[GPU0] Epoch 3 | Batchsize: 300 | Steps: 2136 | LR: 0.000099
-[4 / 90] epoch/s, LR: 0.000099, training loss: 5.8963, validation loss: 5.3853, validation accuracy: 0.0629 
-[GPU0] Epoch 4 | Batchsize: 300 | Steps: 2136 | LR: 0.000098
-[GPU1] Epoch 4 | Batchsize: 300 | Steps: 2136 | LR: 0.000098
-[5 / 90] epoch/s, LR: 0.000098, training loss: 5.7864, validation loss: 5.2722, validation accuracy: 0.0735 
-[GPU0] Epoch 5 | Batchsize: 300 | Steps: 2136 | LR: 0.000098
-[GPU1] Epoch 5 | Batchsize: 300 | Steps: 2136 | LR: 0.000098
-Epoch 5 | Training snapshot saved at model_snapshots/fastalexnet
-[6 / 90] epoch/s, LR: 0.000097, training loss: 5.7033, validation loss: 5.1583, validation accuracy: 0.0844 
-[GPU1] Epoch 6 | Batchsize: 300 | Steps: 2136 | LR: 0.000097
-[GPU0] Epoch 6 | Batchsize: 300 | Steps: 2136 | LR: 0.000097
-[7 / 90] epoch/s, LR: 0.000096, training loss: 5.6278, validation loss: 5.0740, validation accuracy: 0.0939 
-[GPU0] Epoch 7 | Batchsize: 300 | Steps: 2136 | LR: 0.000095
-[GPU1] Epoch 7 | Batchsize: 300 | Steps: 2136 | LR: 0.000095
-[8 / 90] epoch/s, LR: 0.000095, training loss: 5.5628, validation loss: 5.0584, validation accuracy: 0.0951 
-[GPU0] Epoch 8 | Batchsize: 300 | Steps: 2136 | LR: 0.000094
-[GPU1] Epoch 8 | Batchsize: 300 | Steps: 2136 | LR: 0.000094
-[9 / 90] epoch/s, LR: 0.000093, training loss: 5.5080, validation loss: 4.9419, validation accuracy: 0.1085 
-[GPU0] Epoch 9 | Batchsize: 300 | Steps: 2136 | LR: 0.000092
-[GPU1] Epoch 9 | Batchsize: 300 | Steps: 2136 | LR: 0.000092
-[10 / 90] epoch/s, LR: 0.000091, training loss: 5.4576, validation loss: 4.8886, validation accuracy: 0.1122 
-[GPU0] Epoch 10 | Batchsize: 300 | Steps: 2136 | LR: 0.000091
-[GPU1] Epoch 10 | Batchsize: 300 | Steps: 2136 | LR: 0.000091
-Epoch 10 | Training snapshot saved at model_snapshots/fastalexnet
-[11 / 90] epoch/s, LR: 0.000090, training loss: 5.4142, validation loss: 4.8152, validation accuracy: 0.1178 
-[GPU0] Epoch 11 | Batchsize: 300 | Steps: 2136 | LR: 0.000089
-[GPU1] Epoch 11 | Batchsize: 300 | Steps: 2136 | LR: 0.000089
-[12 / 90] epoch/s, LR: 0.000088, training loss: 5.3697, validation loss: 4.7653, validation accuracy: 0.1224 
-[GPU0] Epoch 12 | Batchsize: 300 | Steps: 2136 | LR: 0.000087
-[GPU1] Epoch 12 | Batchsize: 300 | Steps: 2136 | LR: 0.000087
-[13 / 90] epoch/s, LR: 0.000086, training loss: 5.3305, validation loss: 4.7397, validation accuracy: 0.1255 
-[GPU1] Epoch 13 | Batchsize: 300 | Steps: 2136 | LR: 0.000084
-[GPU0] Epoch 13 | Batchsize: 300 | Steps: 2136 | LR: 0.000084
-[14 / 90] epoch/s, LR: 0.000083, training loss: 5.2979, validation loss: 4.6516, validation accuracy: 0.1359 
-[GPU0] Epoch 14 | Batchsize: 300 | Steps: 2136 | LR: 0.000082
-[GPU1] Epoch 14 | Batchsize: 300 | Steps: 2136 | LR: 0.000082
-[15 / 90] epoch/s, LR: 0.000081, training loss: 5.2685, validation loss: 4.6111, validation accuracy: 0.1410 
-[GPU0] Epoch 15 | Batchsize: 300 | Steps: 2136 | LR: 0.000080
-[GPU1] Epoch 15 | Batchsize: 300 | Steps: 2136 | LR: 0.000080
-Epoch 15 | Training snapshot saved at model_snapshots/fastalexnet
-[16 / 90] epoch/s, LR: 0.000078, training loss: 5.2369, validation loss: 4.5581, validation accuracy: 0.1487 
-[GPU0] Epoch 16 | Batchsize: 300 | Steps: 2136 | LR: 0.000077
-[GPU1] Epoch 16 | Batchsize: 300 | Steps: 2136 | LR: 0.000077
-[17 / 90] epoch/s, LR: 0.000076, training loss: 5.2088, validation loss: 4.6129, validation accuracy: 0.1442 
-[GPU0] Epoch 17 | Batchsize: 300 | Steps: 2136 | LR: 0.000074
-[GPU1] Epoch 17 | Batchsize: 300 | Steps: 2136 | LR: 0.000074
-[18 / 90] epoch/s, LR: 0.000073, training loss: 5.1856, validation loss: 4.5142, validation accuracy: 0.1558 
-[GPU0] Epoch 18 | Batchsize: 300 | Steps: 2136 | LR: 0.000072
-[GPU1] Epoch 18 | Batchsize: 300 | Steps: 2136 | LR: 0.000072
-[19 / 90] epoch/s, LR: 0.000070, training loss: 5.1570, validation loss: 4.4987, validation accuracy: 0.1526 
-[GPU1] Epoch 19 | Batchsize: 300 | Steps: 2136 | LR: 0.000069
-[GPU0] Epoch 19 | Batchsize: 300 | Steps: 2136 | LR: 0.000069
-[20 / 90] epoch/s, LR: 0.000067, training loss: 5.1381, validation loss: 4.5013, validation accuracy: 0.1552 
-[GPU0] Epoch 20 | Batchsize: 300 | Steps: 2136 | LR: 0.000066
-[GPU1] Epoch 20 | Batchsize: 300 | Steps: 2136 | LR: 0.000066
-Epoch 20 | Training snapshot saved at model_snapshots/fastalexnet
-[21 / 90] epoch/s, LR: 0.000064, training loss: 5.1140, validation loss: 4.4485, validation accuracy: 0.1621 
-[GPU0] Epoch 21 | Batchsize: 300 | Steps: 2136 | LR: 0.000063
-[GPU1] Epoch 21 | Batchsize: 300 | Steps: 2136 | LR: 0.000063
-[22 / 90] epoch/s, LR: 0.000061, training loss: 5.0931, validation loss: 4.3969, validation accuracy: 0.1673 
-[GPU0] Epoch 22 | Batchsize: 300 | Steps: 2136 | LR: 0.000060
-[GPU1] Epoch 22 | Batchsize: 300 | Steps: 2136 | LR: 0.000060
-[23 / 90] epoch/s, LR: 0.000058, training loss: 5.0736, validation loss: 4.4023, validation accuracy: 0.1657 
-[GPU0] Epoch 23 | Batchsize: 300 | Steps: 2136 | LR: 0.000057
-[GPU1] Epoch 23 | Batchsize: 300 | Steps: 2136 | LR: 0.000057
-[24 / 90] epoch/s, LR: 0.000055, training loss: 5.0604, validation loss: 4.3730, validation accuracy: 0.1688 
-[GPU0] Epoch 24 | Batchsize: 300 | Steps: 2136 | LR: 0.000054
-[GPU1] Epoch 24 | Batchsize: 300 | Steps: 2136 | LR: 0.000054
-[25 / 90] epoch/s, LR: 0.000052, training loss: 5.0447, validation loss: 4.3564, validation accuracy: 0.1700 
-[GPU0] Epoch 25 | Batchsize: 300 | Steps: 2136 | LR: 0.000051
-[GPU1] Epoch 25 | Batchsize: 300 | Steps: 2136 | LR: 0.000051
-Epoch 25 | Training snapshot saved at model_snapshots/fastalexnet
-[26 / 90] epoch/s, LR: 0.000049, training loss: 5.0269, validation loss: 4.3490, validation accuracy: 0.1725 
-[GPU0] Epoch 26 | Batchsize: 300 | Steps: 2136 | LR: 0.000047
-[GPU1] Epoch 26 | Batchsize: 300 | Steps: 2136 | LR: 0.000047
-[27 / 90] epoch/s, LR: 0.000046, training loss: 5.0107, validation loss: 4.3179, validation accuracy: 0.1735 
-[GPU1] Epoch 27 | Batchsize: 300 | Steps: 2136 | LR: 0.000044
-[GPU0] Epoch 27 | Batchsize: 300 | Steps: 2136 | LR: 0.000044
-[28 / 90] epoch/s, LR: 0.000043, training loss: 4.9950, validation loss: 4.2861, validation accuracy: 0.1800 
-[GPU0] Epoch 28 | Batchsize: 300 | Steps: 2136 | LR: 0.000041
-[GPU1] Epoch 28 | Batchsize: 300 | Steps: 2136 | LR: 0.000041
-[29 / 90] epoch/s, LR: 0.000040, training loss: 4.9841, validation loss: 4.3302, validation accuracy: 0.1726 
-[GPU1] Epoch 29 | Batchsize: 300 | Steps: 2136 | LR: 0.000038
-[GPU0] Epoch 29 | Batchsize: 300 | Steps: 2136 | LR: 0.000038
-[30 / 90] epoch/s, LR: 0.000037, training loss: 4.9705, validation loss: 4.2659, validation accuracy: 0.1817 
-[GPU0] Epoch 30 | Batchsize: 300 | Steps: 2136 | LR: 0.000035
-[GPU1] Epoch 30 | Batchsize: 300 | Steps: 2136 | LR: 0.000035
-Epoch 30 | Training snapshot saved at model_snapshots/fastalexnet
-[31 / 90] epoch/s, LR: 0.000034, training loss: 4.9579, validation loss: 4.2730, validation accuracy: 0.1819 
-[GPU1] Epoch 31 | Batchsize: 300 | Steps: 2136 | LR: 0.000032
-[GPU0] Epoch 31 | Batchsize: 300 | Steps: 2136 | LR: 0.000032
-[32 / 90] epoch/s, LR: 0.000031, training loss: 4.9477, validation loss: 4.2598, validation accuracy: 0.1824 
-[GPU1] Epoch 32 | Batchsize: 300 | Steps: 2136 | LR: 0.000029
-[GPU0] Epoch 32 | Batchsize: 300 | Steps: 2136 | LR: 0.000029
-[33 / 90] epoch/s, LR: 0.000028, training loss: 4.9393, validation loss: 4.2493, validation accuracy: 0.1821 
-[GPU0] Epoch 33 | Batchsize: 300 | Steps: 2136 | LR: 0.000027
-[GPU1] Epoch 33 | Batchsize: 300 | Steps: 2136 | LR: 0.000027
-[34 / 90] epoch/s, LR: 0.000025, training loss: 4.9256, validation loss: 4.2467, validation accuracy: 0.1822 
-[GPU0] Epoch 34 | Batchsize: 300 | Steps: 2136 | LR: 0.000024
-[GPU1] Epoch 34 | Batchsize: 300 | Steps: 2136 | LR: 0.000024
-[35 / 90] epoch/s, LR: 0.000023, training loss: 4.9196, validation loss: 4.2504, validation accuracy: 0.1826 
-[GPU0] Epoch 35 | Batchsize: 300 | Steps: 2136 | LR: 0.000021
-[GPU1] Epoch 35 | Batchsize: 300 | Steps: 2136 | LR: 0.000021
-Epoch 35 | Training snapshot saved at model_snapshots/fastalexnet
-[36 / 90] epoch/s, LR: 0.000020, training loss: 4.9123, validation loss: 4.2190, validation accuracy: 0.1856 
-[GPU0] Epoch 36 | Batchsize: 300 | Steps: 2136 | LR: 0.000019
-[GPU1] Epoch 36 | Batchsize: 300 | Steps: 2136 | LR: 0.000019
-[37 / 90] epoch/s, LR: 0.000018, training loss: 4.9035, validation loss: 4.2094, validation accuracy: 0.1881 
-[GPU0] Epoch 37 | Batchsize: 300 | Steps: 2136 | LR: 0.000017
-[GPU1] Epoch 37 | Batchsize: 300 | Steps: 2136 | LR: 0.000017
-[38 / 90] epoch/s, LR: 0.000015, training loss: 4.8992, validation loss: 4.2029, validation accuracy: 0.1889 
-[GPU1] Epoch 38 | Batchsize: 300 | Steps: 2136 | LR: 0.000014
-[GPU0] Epoch 38 | Batchsize: 300 | Steps: 2136 | LR: 0.000014
-[39 / 90] epoch/s, LR: 0.000013, training loss: 4.8950, validation loss: 4.1897, validation accuracy: 0.1910 
-[GPU1] Epoch 39 | Batchsize: 300 | Steps: 2136 | LR: 0.000012
-[GPU0] Epoch 39 | Batchsize: 300 | Steps: 2136 | LR: 0.000012
-[40 / 90] epoch/s, LR: 0.000011, training loss: 4.8853, validation loss: 4.1936, validation accuracy: 0.1895 
-[GPU0] Epoch 40 | Batchsize: 300 | Steps: 2136 | LR: 0.000010
-[GPU1] Epoch 40 | Batchsize: 300 | Steps: 2136 | LR: 0.000010
-Epoch 40 | Training snapshot saved at model_snapshots/fastalexnet
-[41 / 90] epoch/s, LR: 0.000010, training loss: 4.8779, validation loss: 4.1818, validation accuracy: 0.1902 
-[GPU0] Epoch 41 | Batchsize: 300 | Steps: 2136 | LR: 0.000009
-[GPU1] Epoch 41 | Batchsize: 300 | Steps: 2136 | LR: 0.000009
-[42 / 90] epoch/s, LR: 0.000008, training loss: 4.8777, validation loss: 4.1773, validation accuracy: 0.1935 
-[GPU0] Epoch 42 | Batchsize: 300 | Steps: 2136 | LR: 0.000007
-[GPU1] Epoch 42 | Batchsize: 300 | Steps: 2136 | LR: 0.000007
-[43 / 90] epoch/s, LR: 0.000006, training loss: 4.8743, validation loss: 4.1776, validation accuracy: 0.1893 
-[GPU0] Epoch 43 | Batchsize: 300 | Steps: 2136 | LR: 0.000006
-[GPU1] Epoch 43 | Batchsize: 300 | Steps: 2136 | LR: 0.000006
-[44 / 90] epoch/s, LR: 0.000005, training loss: 4.8699, validation loss: 4.1772, validation accuracy: 0.1922 
-[GPU0] Epoch 44 | Batchsize: 300 | Steps: 2136 | LR: 0.000004
-[GPU1] Epoch 44 | Batchsize: 300 | Steps: 2136 | LR: 0.000004
-[45 / 90] epoch/s, LR: 0.000004, training loss: 4.8663, validation loss: 4.1639, validation accuracy: 0.1926 
-[GPU0] Epoch 45 | Batchsize: 300 | Steps: 2136 | LR: 0.000003
-[GPU1] Epoch 45 | Batchsize: 300 | Steps: 2136 | LR: 0.000003
-Epoch 45 | Training snapshot saved at model_snapshots/fastalexnet
-[46 / 90] epoch/s, LR: 0.000003, training loss: 4.8622, validation loss: 4.1710, validation accuracy: 0.1929 
-[GPU1] Epoch 46 | Batchsize: 300 | Steps: 2136 | LR: 0.000003
-[GPU0] Epoch 46 | Batchsize: 300 | Steps: 2136 | LR: 0.000003
-[47 / 90] epoch/s, LR: 0.000002, training loss: 4.8626, validation loss: 4.1673, validation accuracy: 0.1945 
-[GPU0] Epoch 47 | Batchsize: 300 | Steps: 2136 | LR: 0.000002
-[GPU1] Epoch 47 | Batchsize: 300 | Steps: 2136 | LR: 0.000002
-[48 / 90] epoch/s, LR: 0.000002, training loss: 4.8605, validation loss: 4.1620, validation accuracy: 0.1932 
-[GPU0] Epoch 48 | Batchsize: 300 | Steps: 2136 | LR: 0.000001
-[GPU1] Epoch 48 | Batchsize: 300 | Steps: 2136 | LR: 0.000001
-[49 / 90] epoch/s, LR: 0.000001, training loss: 4.8638, validation loss: 4.1623, validation accuracy: 0.1940 
-[GPU0] Epoch 49 | Batchsize: 300 | Steps: 2136 | LR: 0.000001
-[GPU1] Epoch 49 | Batchsize: 300 | Steps: 2136 | LR: 0.000001
-[50 / 90] epoch/s, LR: 0.000001, training loss: 4.8584, validation loss: 4.1655, validation accuracy: 0.1932 
-[GPU1] Epoch 50 | Batchsize: 300 | Steps: 2136 | LR: 0.000001
-[GPU0] Epoch 50 | Batchsize: 300 | Steps: 2136 | LR: 0.000001
+ testing dataset size: 1281167
+ testing validation size: 50000
+ testing dataset size: 1281167
+ testing validation size: 50000
+Loading snapshot
+Loading snapshot
+Loading snapshot
+Loading snapshot
+Snapshot loaded at epoch : 60
+Snapshot loaded at epoch : 60
+Snapshot loaded at epoch : 60
+Snapshot loaded at epoch : 60
+[GPU0] Epoch 60 | Batchsize: 300 | Steps: 1068 | LR: 0.000012
+[GPU2] Epoch 60 | Batchsize: 300 | Steps: 1068 | LR: 0.000012
+[GPU3] Epoch 60 | Batchsize: 300 | Steps: 1068 | LR: 0.000012
+[GPU1] Epoch 60 | Batchsize: 300 | Steps: 1068 | LR: 0.000012
+[62 / 90] epoch/s, LR: 0.000013, training loss: 4.8587, validation loss: 4.1524, validation accuracy: 0.1931 
+[GPU0] Epoch 62 | Batchsize: 300 | Steps: 2136 | LR: 0.000014
+[GPU1] Epoch 62 | Batchsize: 300 | Steps: 2136 | LR: 0.000014
+Epoch 60 | Training snapshot saved at model_snapshots/fastalexnet
+[61 / 90] epoch/s, LR: 0.000013, training loss: 4.8569, validation loss: 4.1588, validation accuracy: 0.1939 
+[GPU0] Epoch 61 | Batchsize: 300 | Steps: 1068 | LR: 0.000014
+[GPU3] Epoch 61 | Batchsize: 300 | Steps: 1068 | LR: 0.000014
+[GPU2] Epoch 61 | Batchsize: 300 | Steps: 1068 | LR: 0.000014
+[GPU1] Epoch 61 | Batchsize: 300 | Steps: 1068 | LR: 0.000014
+[63 / 90] epoch/s, LR: 0.000015, training loss: 4.8576, validation loss: 4.1666, validation accuracy: 0.1925 
+[GPU0] Epoch 63 | Batchsize: 300 | Steps: 2136 | LR: 0.000017
+[GPU1] Epoch 63 | Batchsize: 300 | Steps: 2136 | LR: 0.000017
+[64 / 90] epoch/s, LR: 0.000018, training loss: 4.8544, validation loss: 4.1666, validation accuracy: 0.1940 
+[GPU0] Epoch 64 | Batchsize: 300 | Steps: 2136 | LR: 0.000019
+[GPU1] Epoch 64 | Batchsize: 300 | Steps: 2136 | LR: 0.000019
+[62 / 90] epoch/s, LR: 0.000015, training loss: 4.8525, validation loss: 4.1549, validation accuracy: 0.1927 
+[GPU2] Epoch 62 | Batchsize: 300 | Steps: 1068 | LR: 0.000017
+[GPU1] Epoch 62 | Batchsize: 300 | Steps: 1068 | LR: 0.000017
+[GPU0] Epoch 62 | Batchsize: 300 | Steps: 1068 | LR: 0.000017
+[GPU3] Epoch 62 | Batchsize: 300 | Steps: 1068 | LR: 0.000017
+[65 / 90] epoch/s, LR: 0.000020, training loss: 4.8499, validation loss: 4.1488, validation accuracy: 0.1967 
+[GPU0] Epoch 65 | Batchsize: 300 | Steps: 2136 | LR: 0.000021
+[GPU1] Epoch 65 | Batchsize: 300 | Steps: 2136 | LR: 0.000021
+[GPU1] Epoch 63 | Batchsize: 300 | Steps: 1068 | LR: 0.000019
+[GPU2] Epoch 63 | Batchsize: 300 | Steps: 1068 | LR: 0.000019
+[63 / 90] epoch/s, LR: 0.000018, training loss: 4.8552, validation loss: 4.1558, validation accuracy: 0.1938 
+[GPU3] Epoch 63 | Batchsize: 300 | Steps: 1068 | LR: 0.000019
+[GPU0] Epoch 63 | Batchsize: 300 | Steps: 1068 | LR: 0.000019
+Epoch 65 | Training snapshot saved at model_snapshots/fastalexnet
+[66 / 90] epoch/s, LR: 0.000023, training loss: 4.8498, validation loss: 4.1284, validation accuracy: 0.1953 
+[GPU0] Epoch 66 | Batchsize: 300 | Steps: 2136 | LR: 0.000024
+[GPU1] Epoch 66 | Batchsize: 300 | Steps: 2136 | LR: 0.000024
+[67 / 90] epoch/s, LR: 0.000025, training loss: 4.8452, validation loss: 4.1298, validation accuracy: 0.1982 
+[GPU1] Epoch 67 | Batchsize: 300 | Steps: 2136 | LR: 0.000027
+[GPU0] Epoch 67 | Batchsize: 300 | Steps: 2136 | LR: 0.000027
+[GPU1] Epoch 64 | Batchsize: 300 | Steps: 1068 | LR: 0.000021
+[64 / 90] epoch/s, LR: 0.000020, training loss: 4.8460, validation loss: 4.1650, validation accuracy: 0.1922 
+[GPU2] Epoch 64 | Batchsize: 300 | Steps: 1068 | LR: 0.000021
+[GPU0] Epoch 64 | Batchsize: 300 | Steps: 1068 | LR: 0.000021
+[GPU3] Epoch 64 | Batchsize: 300 | Steps: 1068 | LR: 0.000021
+[68 / 90] epoch/s, LR: 0.000028, training loss: 4.8488, validation loss: 4.1311, validation accuracy: 0.1976 
+[GPU0] Epoch 68 | Batchsize: 300 | Steps: 2136 | LR: 0.000029
+[GPU1] Epoch 68 | Batchsize: 300 | Steps: 2136 | LR: 0.000029
+[69 / 90] epoch/s, LR: 0.000031, training loss: 4.8456, validation loss: 4.1356, validation accuracy: 0.1965 
+[GPU1] Epoch 69 | Batchsize: 300 | Steps: 2136 | LR: 0.000032
+[GPU0] Epoch 69 | Batchsize: 300 | Steps: 2136 | LR: 0.000032
+[65 / 90] epoch/s, LR: 0.000023, training loss: 4.8455, validation loss: 4.1633, validation accuracy: 0.1911 
+[GPU0] Epoch 65 | Batchsize: 300 | Steps: 1068 | LR: 0.000024
+[GPU1] Epoch 65 | Batchsize: 300 | Steps: 1068 | LR: 0.000024
+[GPU2] Epoch 65 | Batchsize: 300 | Steps: 1068 | LR: 0.000024
+[GPU3] Epoch 65 | Batchsize: 300 | Steps: 1068 | LR: 0.000024
+[70 / 90] epoch/s, LR: 0.000034, training loss: 4.8424, validation loss: 4.1443, validation accuracy: 0.1958 
+[GPU1] Epoch 70 | Batchsize: 300 | Steps: 2136 | LR: 0.000035
+[GPU0] Epoch 70 | Batchsize: 300 | Steps: 2136 | LR: 0.000035
+[GPU1] Epoch 66 | Batchsize: 300 | Steps: 1068 | LR: 0.000027
+[GPU3] Epoch 66 | Batchsize: 300 | Steps: 1068 | LR: 0.000027
+Epoch 65 | Training snapshot saved at model_snapshots/fastalexnet
+[66 / 90] epoch/s, LR: 0.000025, training loss: 4.8440, validation loss: 4.1562, validation accuracy: 0.1942 
+[GPU2] Epoch 66 | Batchsize: 300 | Steps: 1068 | LR: 0.000027
+[GPU0] Epoch 66 | Batchsize: 300 | Steps: 1068 | LR: 0.000027
+Epoch 70 | Training snapshot saved at model_snapshots/fastalexnet
+[71 / 90] epoch/s, LR: 0.000037, training loss: 4.8346, validation loss: 4.1401, validation accuracy: 0.1962 
+[GPU0] Epoch 71 | Batchsize: 300 | Steps: 2136 | LR: 0.000038
+[GPU1] Epoch 71 | Batchsize: 300 | Steps: 2136 | LR: 0.000038
+[72 / 90] epoch/s, LR: 0.000040, training loss: 4.8365, validation loss: 4.1061, validation accuracy: 0.1982 
+[GPU0] Epoch 72 | Batchsize: 300 | Steps: 2136 | LR: 0.000041
+[GPU1] Epoch 72 | Batchsize: 300 | Steps: 2136 | LR: 0.000041
+[67 / 90] epoch/s, LR: 0.000028, training loss: 4.8492, validation loss: 4.1680, validation accuracy: 0.1910 
+[GPU0] Epoch 67 | Batchsize: 300 | Steps: 1068 | LR: 0.000029
+[GPU2] Epoch 67 | Batchsize: 300 | Steps: 1068 | LR: 0.000029
+[GPU1] Epoch 67 | Batchsize: 300 | Steps: 1068 | LR: 0.000029
+[GPU3] Epoch 67 | Batchsize: 300 | Steps: 1068 | LR: 0.000029
+[73 / 90] epoch/s, LR: 0.000043, training loss: 4.8284, validation loss: 4.1237, validation accuracy: 0.1963 
+[GPU0] Epoch 73 | Batchsize: 300 | Steps: 2136 | LR: 0.000044
+[GPU1] Epoch 73 | Batchsize: 300 | Steps: 2136 | LR: 0.000044
+[68 / 90] epoch/s, LR: 0.000031, training loss: 4.8489, validation loss: 4.1484, validation accuracy: 0.1935 
+[GPU0] Epoch 68 | Batchsize: 300 | Steps: 1068 | LR: 0.000032
+[GPU2] Epoch 68 | Batchsize: 300 | Steps: 1068 | LR: 0.000032
+[GPU3] Epoch 68 | Batchsize: 300 | Steps: 1068 | LR: 0.000032
+[GPU1] Epoch 68 | Batchsize: 300 | Steps: 1068 | LR: 0.000032
+[74 / 90] epoch/s, LR: 0.000046, training loss: 4.8239, validation loss: 4.1089, validation accuracy: 0.1985 
+[GPU0] Epoch 74 | Batchsize: 300 | Steps: 2136 | LR: 0.000047
+[GPU1] Epoch 74 | Batchsize: 300 | Steps: 2136 | LR: 0.000047
+[75 / 90] epoch/s, LR: 0.000049, training loss: 4.8183, validation loss: 4.1120, validation accuracy: 0.1998 
+[GPU0] Epoch 75 | Batchsize: 300 | Steps: 2136 | LR: 0.000050
+[GPU1] Epoch 75 | Batchsize: 300 | Steps: 2136 | LR: 0.000050
+[69 / 90] epoch/s, LR: 0.000034, training loss: 4.8424, validation loss: 4.1400, validation accuracy: 0.1937 
+[GPU0] Epoch 69 | Batchsize: 300 | Steps: 1068 | LR: 0.000035
+[GPU2] Epoch 69 | Batchsize: 300 | Steps: 1068 | LR: 0.000035
+[GPU1] Epoch 69 | Batchsize: 300 | Steps: 1068 | LR: 0.000035
+[GPU3] Epoch 69 | Batchsize: 300 | Steps: 1068 | LR: 0.000035
