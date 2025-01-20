@@ -19,7 +19,7 @@ from torchsummary import summary
 from fvcore.nn import FlopCountAnalysis
 
 from lenetfastkan import LeNet5_KAN
-from alexnetfastkan import AlexNetKAN
+from alexnetkan import AlexNetKAN
 from lenetcnn import LeNet5
 
 import time
@@ -27,15 +27,32 @@ import time
 device = "cuda:0"
 
 def load_data():
-    my_transforms = transforms.Compose([
-        transforms.Resize((32,32)),
+    transform = transforms.Compose([
+        transforms.Resize(256),
+        transforms.CenterCrop(224),
         transforms.ToTensor(),
-        transforms.Normalize(mean=(0.13,), std=(0.308,))
+        transforms.Normalize(
+            mean=[0.485, 0.456, 0.406], 
+            std=[0.229, 0.224, 0.225]
+        ),
     ])
 
-    train_ds = datasets.MNIST(root="./mnist/train", train=True, download=False, transform=my_transforms)
-    test_ds = datasets.MNIST(root="./mnist/test", train=False, download=False, transform=my_transforms)
-    return train_ds, test_ds
+    val_ds = datasets.ImageNet(
+                            root="./imagenet/val/", 
+                            split='val', 
+                            transform=transform,
+                        )
+    # targets = train_ds.targets
+    # _, test_train = train_test_split(np.arange(len(targets)), test_size = 0.05, stratify = targets, random_state=42 )
+    # train_ds = Subset(train_ds, test_train)
+    #
+    # valid_targets = val_ds.targets
+    # _, test_val = train_test_split(np.arange(len(valid_targets)), test_size = 0.05, stratify = valid_targets, random_state=42)
+    # val_ds = Subset(val_ds, test_val)
+
+    print(f" testing validation size: {len(val_ds)}")
+
+    return val_ds
 
 
 def load_model(snapshot_path):
@@ -170,8 +187,7 @@ def calculate_output(dataset, model):
 
 def main():
     model_details = {
-        "LeNet":"lenetcnn",
-        "LeNet KAN":"lenetfastkan"
+        "AlexNet KAN":"alexnetkan",
     }
 
     for name, snapshot_path in model_details.items():
@@ -180,7 +196,7 @@ def main():
         hist = snapshot["HIST"]
         epochs = snapshot["EPOCHS_RUN"]
 
-        _, dataset = load_data()
+        dataset = load_data()
         
         dl = prepare_data(dataset, 1)
         sample = next(iter(dl))[0].to(device)
@@ -198,8 +214,7 @@ def main():
         
         print(f" length of testing data {len(dataset)}")
 
-
-        load_history_and_plot_graph(hist, epochs, name)
+        # load_history_and_plot_graph(hist, epochs, name)
 
         with torch.no_grad():
             all_outputs, all_targets = calculate_output(dataset, model)
