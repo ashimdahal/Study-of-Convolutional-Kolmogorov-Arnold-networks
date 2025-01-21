@@ -3,6 +3,15 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+# Set the font sizes
+TITLE_SIZE = 20 
+LABEL_SIZE = 16
+TICK_SIZE = 14
+LEGEND_SIZE = 14
+
+# Set the general font size
+plt.rcParams['font.size'] = TICK_SIZE
+
 # Data dictionary with all models and their metrics
 data = {
     'AlexNet KAN': {
@@ -91,15 +100,15 @@ N = len(categories)
 angles = [n / float(N) * 2 * np.pi for n in range(N)]
 angles += angles[:1]
 
-# Create the plot
-plt.figure(figsize=(12, 8))
+# Create the plot with larger figure size
+plt.figure(figsize=(15, 10))
 ax = plt.subplot(111, polar=True)
 
-# Plot data
+# Plot data with thicker lines
 for idx, model in enumerate(normalized_df.index):
     values = normalized_df.loc[model].values.flatten().tolist()
     values += values[:1]
-    ax.plot(angles, values, linewidth=2, linestyle='solid', label=model)
+    ax.plot(angles, values, linewidth=3, linestyle='solid', label=model)
     ax.fill(angles, values, alpha=0.1)
 
 # Fix axis to go in the right order and start at 12 o'clock
@@ -108,12 +117,17 @@ ax.set_theta_direction(-1)
 
 # Draw axis lines for each angle and label
 ax.set_xticks(angles[:-1])
-ax.set_xticklabels(categories)
+ax.set_xticklabels(categories, size=LABEL_SIZE)
 
-# Add legend
-plt.legend(loc='upper right', bbox_to_anchor=(0.1, 0.1))
+# Increase tick label size
+ax.tick_params(axis='y', labelsize=TICK_SIZE)
 
-plt.title("Model Comparison Radar Plot\nHigher values indicate better performance", pad=20)
+# Add legend with larger font in the top right
+plt.legend(loc='upper right', bbox_to_anchor=(1.3, 1.1), fontsize=LEGEND_SIZE)
+
+# Add title with larger font
+plt.title("Model Comparison Radar Plot\nHigher values indicate better performance", 
+          pad=20, size=TITLE_SIZE, weight='bold')
 
 # Add gridlines
 ax.grid(True)
