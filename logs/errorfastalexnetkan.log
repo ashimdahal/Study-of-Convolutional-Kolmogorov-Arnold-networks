@@ -18,3 +18,5 @@ W0116 14:47:47.296842 47940448546176 torch/distributed/run.py:757] *************
 [rank1]:[W Utils.hpp:108] Warning: Environment variable NCCL_BLOCKING_WAIT is deprecated; use TORCH_NCCL_BLOCKING_WAIT instead (function getCvarString)
 [rank3]:[W Utils.hpp:108] Warning: Environment variable NCCL_BLOCKING_WAIT is deprecated; use TORCH_NCCL_BLOCKING_WAIT instead (function getCvarString)
 [rank2]:[W Utils.hpp:108] Warning: Environment variable NCCL_BLOCKING_WAIT is deprecated; use TORCH_NCCL_BLOCKING_WAIT instead (function getCvarString)
+slurmstepd: error: *** JOB 526839 ON gpu002 CANCELLED AT 2025-01-20T12:30:17 ***
+slurmstepd: error: *** JOB 526863 STEPD TERMINATED ON gpu001 AT 2025-01-20T12:31:47 DUE TO JOB NOT ENDING WITH SIGNALS ***

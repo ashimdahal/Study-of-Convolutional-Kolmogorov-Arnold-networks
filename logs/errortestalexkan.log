@@ -1,17 +1,14 @@
-/homes/01/axdahal/miniconda3/envs/torch/lib/python3.8/site-packages/albumentations/__init__.py:13: UserWarning: A new version of Albumentations is available: 1.4.21 (you have 1.4.18). Upgrade using: pip install -U albumentations. To disable automatic update checks, set the environment variable NO_ALBUMENTATIONS_UPDATE to 1.
-  check_for_updates()
-Unsupported operator aten::max_pool2d encountered 2 time(s)
-The following submodules of the model were never called during the trace of the graph. They may be unused, or they were accessed by direct calls to .forward() or via other python methods. In the latter case they will have zeros for statistics, though their statistics will still contribute to their parent calling module.
-flat
-Unsupported operator aten::silu encountered 2 time(s)
-Unsupported operator aten::sub encountered 2 time(s)
-Unsupported operator aten::div encountered 2 time(s)
-Unsupported operator aten::pow encountered 2 time(s)
-Unsupported operator aten::neg encountered 2 time(s)
-Unsupported operator aten::exp encountered 2 time(s)
-Unsupported operator aten::movedim encountered 2 time(s)
-Unsupported operator aten::add encountered 2 time(s)
-Unsupported operator aten::clone encountered 2 time(s)
-Unsupported operator aten::max_pool2d encountered 2 time(s)
-The following submodules of the model were never called during the trace of the graph. They may be unused, or they were accessed by direct calls to .forward() or via other python methods. In the latter case they will have zeros for statistics, though their statistics will still contribute to their parent calling module.
-flat
+Unsupported operator aten::im2col encountered 5 time(s)
+Unsupported operator aten::mul encountered 45 time(s)
+Unsupported operator aten::silu encountered 5 time(s)
+Unsupported operator aten::lt encountered 5 time(s)
+Unsupported operator aten::sub encountered 85 time(s)
+Unsupported operator aten::div encountered 35 time(s)
+Unsupported operator aten::add encountered 50 time(s)
+Unsupported operator aten::mean encountered 5 time(s)
+Unsupported operator aten::var encountered 5 time(s)
+Unsupported operator aten::sqrt encountered 5 time(s)
+Unsupported operator aten::max_pool2d encountered 3 time(s)
+/homes/01/axdahal/miniconda3/envs/torch/lib/python3.8/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=None`.
+  warnings.warn(msg)
+Unsupported operator aten::max_pool2d encountered 3 time(s)
