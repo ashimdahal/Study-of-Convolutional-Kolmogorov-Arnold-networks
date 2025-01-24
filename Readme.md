@@ -1,6 +1,8 @@
 # Whats this?
 A personal fork of write once copy again's template to train AlexNET on Imagenet with Convolutional Kolmogorov Arnold Networks instaed of CNNs. :)
 
+The file structure in related to the paper is the following; some results from albation study were not reported in the paper.
+
 ```
 ├── graphs
 │   ├── loss_comparision.png #not reported
