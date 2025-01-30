@@ -3,7 +3,7 @@ AlexNET on Imagenet with Convolutional Kolmogorov Arnold Networks instaed of CNN
 
 We train and test CKANs against 3 dataset and with 3 models on comparable grounds: AlexNet style architecture for ImageNet, LeNet style architecture for MNIST and Tabular CNN style architecture for MoA.
 
-The results are presented in paper: \<link comming soon\>.
+The results are presented in paper: [arxiv.](https://arxiv.org/abs/2501.15757)
 
 The file structure in related to the paper is the following; some results from albation study were not reported in the paper.
 
