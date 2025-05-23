@@ -1,0 +1,48 @@
+/homes/01/axdahal/miniconda3/envs/torch/lib/python3.8/site-packages/torch/utils/data/dataloader.py:558: UserWarning: This DataLoader will create 4 worker processes in total. Our suggested max number of worker in current system is 1, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(_create_warning_msg(
+/homes/01/axdahal/miniconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/lazy.py:181: UserWarning: Lazy modules are a new feature under heavy development so changes to the API or functionality can happen at any moment.
+  warnings.warn('Lazy modules are a new feature under heavy development '
+Traceback (most recent call last):
+  File "scripts/lenet_fast_kan_ablation.py", line 290, in <module>
+    main()
+  File "scripts/lenet_fast_kan_ablation.py", line 209, in main
+    model = ptq_int8(model, calib_tensor)
+  File "scripts/lenet_fast_kan_ablation.py", line 103, in ptq_int8
+    prepared    = prepare_fx(model_cpu, qconfig_map, (example_inp,))
+  File "/homes/01/axdahal/miniconda3/envs/torch/lib/python3.8/site-packages/torch/ao/quantization/quantize_fx.py", line 382, in prepare_fx
+    return _prepare_fx(
+  File "/homes/01/axdahal/miniconda3/envs/torch/lib/python3.8/site-packages/torch/ao/quantization/quantize_fx.py", line 135, in _prepare_fx
+    graph_module = GraphModule(model, tracer.trace(model))
+  File "/homes/01/axdahal/miniconda3/envs/torch/lib/python3.8/site-packages/torch/fx/_symbolic_trace.py", line 793, in trace
+    (self.create_arg(fn(*args)),),
+  File "scripts/lenet_fast_kan_ablation.py", line 68, in forward
+    x = self.layer1(x)
+  File "/homes/01/axdahal/miniconda3/envs/torch/lib/python3.8/site-packages/torch/fx/_symbolic_trace.py", line 771, in module_call_wrapper
+    return self.call_module(mod, forward, args, kwargs)
+  File "/homes/01/axdahal/miniconda3/envs/torch/lib/python3.8/site-packages/torch/fx/_symbolic_trace.py", line 495, in call_module
+    ret_val = forward(*args, **kwargs)
+  File "/homes/01/axdahal/miniconda3/envs/torch/lib/python3.8/site-packages/torch/fx/_symbolic_trace.py", line 764, in forward
+    return _orig_module_call(mod, *args, **kwargs)
+  File "/homes/01/axdahal/miniconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/homes/01/axdahal/miniconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/homes/01/axdahal/miniconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/container.py", line 217, in forward
+    input = module(input)
+  File "/homes/01/axdahal/miniconda3/envs/torch/lib/python3.8/site-packages/torch/fx/_symbolic_trace.py", line 771, in module_call_wrapper
+    return self.call_module(mod, forward, args, kwargs)
+  File "/homes/01/axdahal/miniconda3/envs/torch/lib/python3.8/site-packages/torch/fx/_symbolic_trace.py", line 495, in call_module
+    ret_val = forward(*args, **kwargs)
+  File "/homes/01/axdahal/miniconda3/envs/torch/lib/python3.8/site-packages/torch/fx/_symbolic_trace.py", line 764, in forward
+    return _orig_module_call(mod, *args, **kwargs)
+  File "/homes/01/axdahal/miniconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/homes/01/axdahal/miniconda3/envs/torch/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/homes/01/axdahal/projects/kan/scripts/kan_convs/fast_kan_conv.py", line 85, in forward
+    for group_ind, _x in enumerate(split_x):
+  File "/homes/01/axdahal/miniconda3/envs/torch/lib/python3.8/site-packages/torch/fx/proxy.py", line 412, in __iter__
+    return self.tracer.iter(self)
+  File "/homes/01/axdahal/miniconda3/envs/torch/lib/python3.8/site-packages/torch/fx/proxy.py", line 312, in iter
+    raise TraceError('Proxy object cannot be iterated. This can be '
+torch.fx.proxy.TraceError: Proxy object cannot be iterated. This can be attempted when the Proxy is used in a loop or as a *args or **kwargs function argument. See the torch.fx docs on pytorch.org for a more detailed explanation of what types of control flow can be traced, and check out the Proxy docstring for help troubleshooting Proxy iteration errors
