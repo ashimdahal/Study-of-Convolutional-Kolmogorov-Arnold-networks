@@ -1,5 +1,0 @@
-
-=== [1/48] {'grid_size': 4, 'width_mult': 1.0, 'use_relu': True, 'prune_amt': 0.0, 'quant': 'fp32'} ===
-  ep 1/5  train_loss=0.4447  ep 2/5  train_loss=0.0673  ep 3/5  train_loss=0.0480  ep 4/5  train_loss=0.0356  ep 5/5  train_loss=0.0294→ acc=0.9891 | loss=0.031 | flops=1.9 M | lat 2.0 ms
-
-=== [2/48] {'grid_size': 4, 'width_mult': 1.0, 'use_relu': True, 'prune_amt': 0.0, 'quant': 'int8'} ===

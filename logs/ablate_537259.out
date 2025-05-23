@@ -1,0 +1,72 @@
+
+=== [1/24] {'grid_size': 4, 'width_mult': 1.0, 'use_relu': True, 'prune_amt': 0.0} ===
+  ep 1/5  train_loss=0.4456  ep 2/5  train_loss=0.0731  ep 3/5  train_loss=0.0520  ep 4/5  train_loss=0.0414  ep 5/5  train_loss=0.0336→ acc=0.9882 | loss=0.038 | flops=1.9 M | lat 2.0 ms
+
+=== [2/24] {'grid_size': 4, 'width_mult': 1.0, 'use_relu': True, 'prune_amt': 0.25} ===
+  ep 1/5  train_loss=0.4747  ep 2/5  train_loss=0.0792  ep 3/5  train_loss=0.0524  ep 4/5  train_loss=0.0403  ep 5/5  train_loss=0.0359→ acc=0.9885 | loss=0.038 | flops=1.9 M | lat 2.0 ms
+
+=== [3/24] {'grid_size': 4, 'width_mult': 1.0, 'use_relu': False, 'prune_amt': 0.0} ===
+  ep 1/5  train_loss=0.3252  ep 2/5  train_loss=0.0729  ep 3/5  train_loss=0.0503  ep 4/5  train_loss=0.0416  ep 5/5  train_loss=0.0354→ acc=0.9829 | loss=0.051 | flops=1.9 M | lat 1.3 ms
+
+=== [4/24] {'grid_size': 4, 'width_mult': 1.0, 'use_relu': False, 'prune_amt': 0.25} ===
+  ep 1/5  train_loss=0.3558  ep 2/5  train_loss=0.0724  ep 3/5  train_loss=0.0531  ep 4/5  train_loss=0.0437  ep 5/5  train_loss=0.0376→ acc=0.9864 | loss=0.044 | flops=1.9 M | lat 1.4 ms
+
+=== [5/24] {'grid_size': 4, 'width_mult': 1.5, 'use_relu': True, 'prune_amt': 0.0} ===
+  ep 1/5  train_loss=0.3623  ep 2/5  train_loss=0.0580  ep 3/5  train_loss=0.0385  ep 4/5  train_loss=0.0288  ep 5/5  train_loss=0.0237→ acc=0.9904 | loss=0.030 | flops=3.7 M | lat 2.2 ms
+
+=== [6/24] {'grid_size': 4, 'width_mult': 1.5, 'use_relu': True, 'prune_amt': 0.25} ===
+  ep 1/5  train_loss=0.3532  ep 2/5  train_loss=0.0573  ep 3/5  train_loss=0.0411  ep 4/5  train_loss=0.0309  ep 5/5  train_loss=0.0246→ acc=0.9899 | loss=0.029 | flops=3.7 M | lat 1.5 ms
+
+=== [7/24] {'grid_size': 4, 'width_mult': 1.5, 'use_relu': False, 'prune_amt': 0.0} ===
+  ep 1/5  train_loss=0.2751  ep 2/5  train_loss=0.0583  ep 3/5  train_loss=0.0434  ep 4/5  train_loss=0.0369  ep 5/5  train_loss=0.0276→ acc=0.9889 | loss=0.038 | flops=3.7 M | lat 1.3 ms
+
+=== [8/24] {'grid_size': 4, 'width_mult': 1.5, 'use_relu': False, 'prune_amt': 0.25} ===
+  ep 1/5  train_loss=0.2795  ep 2/5  train_loss=0.0595  ep 3/5  train_loss=0.0439  ep 4/5  train_loss=0.0345  ep 5/5  train_loss=0.0295→ acc=0.9872 | loss=0.040 | flops=3.7 M | lat 1.4 ms
+
+=== [9/24] {'grid_size': 8, 'width_mult': 1.0, 'use_relu': True, 'prune_amt': 0.0} ===
+  ep 1/5  train_loss=0.4060  ep 2/5  train_loss=0.0682  ep 3/5  train_loss=0.0443  ep 4/5  train_loss=0.0325  ep 5/5  train_loss=0.0254→ acc=0.9867 | loss=0.039 | flops=3.3 M | lat 2.4 ms
+
+=== [10/24] {'grid_size': 8, 'width_mult': 1.0, 'use_relu': True, 'prune_amt': 0.25} ===
+  ep 1/5  train_loss=0.4322  ep 2/5  train_loss=0.0671  ep 3/5  train_loss=0.0468  ep 4/5  train_loss=0.0359  ep 5/5  train_loss=0.0295→ acc=0.9866 | loss=0.040 | flops=3.3 M | lat 1.5 ms
+
+=== [11/24] {'grid_size': 8, 'width_mult': 1.0, 'use_relu': False, 'prune_amt': 0.0} ===
+  ep 1/5  train_loss=0.3324  ep 2/5  train_loss=0.0641  ep 3/5  train_loss=0.0452  ep 4/5  train_loss=0.0343  ep 5/5  train_loss=0.0244→ acc=0.9884 | loss=0.036 | flops=3.3 M | lat 1.3 ms
+
+=== [12/24] {'grid_size': 8, 'width_mult': 1.0, 'use_relu': False, 'prune_amt': 0.25} ===
+  ep 1/5  train_loss=0.3360  ep 2/5  train_loss=0.0670  ep 3/5  train_loss=0.0468  ep 4/5  train_loss=0.0363  ep 5/5  train_loss=0.0295→ acc=0.9852 | loss=0.042 | flops=3.3 M | lat 1.4 ms
+
+=== [13/24] {'grid_size': 8, 'width_mult': 1.5, 'use_relu': True, 'prune_amt': 0.0} ===
+  ep 1/5  train_loss=0.3616  ep 2/5  train_loss=0.0523  ep 3/5  train_loss=0.0336  ep 4/5  train_loss=0.0237  ep 5/5  train_loss=0.0165→ acc=0.9907 | loss=0.026 | flops=6.6 M | lat 3.2 ms
+
+=== [14/24] {'grid_size': 8, 'width_mult': 1.5, 'use_relu': True, 'prune_amt': 0.25} ===
+  ep 1/5  train_loss=0.3903  ep 2/5  train_loss=0.0568  ep 3/5  train_loss=0.0374  ep 4/5  train_loss=0.0266  ep 5/5  train_loss=0.0195→ acc=0.9901 | loss=0.031 | flops=6.6 M | lat 1.9 ms
+
+=== [15/24] {'grid_size': 8, 'width_mult': 1.5, 'use_relu': False, 'prune_amt': 0.0} ===
+  ep 1/5  train_loss=0.2512  ep 2/5  train_loss=0.0517  ep 3/5  train_loss=0.0331  ep 4/5  train_loss=0.0248  ep 5/5  train_loss=0.0148→ acc=0.9882 | loss=0.033 | flops=6.6 M | lat 2.0 ms
+
+=== [16/24] {'grid_size': 8, 'width_mult': 1.5, 'use_relu': False, 'prune_amt': 0.25} ===
+  ep 1/5  train_loss=0.2900  ep 2/5  train_loss=0.0579  ep 3/5  train_loss=0.0381  ep 4/5  train_loss=0.0291  ep 5/5  train_loss=0.0195→ acc=0.9885 | loss=0.035 | flops=6.6 M | lat 1.7 ms
+
+=== [17/24] {'grid_size': 16, 'width_mult': 1.0, 'use_relu': True, 'prune_amt': 0.0} ===
+  ep 1/5  train_loss=0.3975  ep 2/5  train_loss=0.0602  ep 3/5  train_loss=0.0374  ep 4/5  train_loss=0.0264  ep 5/5  train_loss=0.0183→ acc=0.9861 | loss=0.041 | flops=6.2 M | lat 3.7 ms
+
+=== [18/24] {'grid_size': 16, 'width_mult': 1.0, 'use_relu': True, 'prune_amt': 0.25} ===
+  ep 1/5  train_loss=0.4828  ep 2/5  train_loss=0.0803  ep 3/5  train_loss=0.0518  ep 4/5  train_loss=0.0350  ep 5/5  train_loss=0.0259→ acc=0.9819 | loss=0.056 | flops=6.2 M | lat 1.8 ms
+
+=== [19/24] {'grid_size': 16, 'width_mult': 1.0, 'use_relu': False, 'prune_amt': 0.0} ===
+  ep 1/5  train_loss=0.3167  ep 2/5  train_loss=0.0576  ep 3/5  train_loss=0.0360  ep 4/5  train_loss=0.0223  ep 5/5  train_loss=0.0165→ acc=0.9867 | loss=0.042 | flops=6.2 M | lat 1.9 ms
+
+=== [20/24] {'grid_size': 16, 'width_mult': 1.0, 'use_relu': False, 'prune_amt': 0.25} ===
+  ep 1/5  train_loss=0.3030  ep 2/5  train_loss=0.0622  ep 3/5  train_loss=0.0396  ep 4/5  train_loss=0.0285  ep 5/5  train_loss=0.0189→ acc=0.9872 | loss=0.038 | flops=6.2 M | lat 2.0 ms
+
+=== [21/24] {'grid_size': 16, 'width_mult': 1.5, 'use_relu': True, 'prune_amt': 0.0} ===
+  ep 1/5  train_loss=0.3310  ep 2/5  train_loss=0.0470  ep 3/5  train_loss=0.0268  ep 4/5  train_loss=0.0168  ep 5/5  train_loss=0.0085→ acc=0.9887 | loss=0.035 | flops=12.3 M | lat 5.1 ms
+
+=== [22/24] {'grid_size': 16, 'width_mult': 1.5, 'use_relu': True, 'prune_amt': 0.25} ===
+  ep 1/5  train_loss=0.3548  ep 2/5  train_loss=0.0570  ep 3/5  train_loss=0.0344  ep 4/5  train_loss=0.0223  ep 5/5  train_loss=0.0166→ acc=0.9877 | loss=0.040 | flops=12.3 M | lat 2.2 ms
+
+=== [23/24] {'grid_size': 16, 'width_mult': 1.5, 'use_relu': False, 'prune_amt': 0.0} ===
+  ep 1/5  train_loss=0.2456  ep 2/5  train_loss=0.0470  ep 3/5  train_loss=0.0288  ep 4/5  train_loss=0.0146  ep 5/5  train_loss=0.0072→ acc=0.9868 | loss=0.043 | flops=12.3 M | lat 2.2 ms
+
+=== [24/24] {'grid_size': 16, 'width_mult': 1.5, 'use_relu': False, 'prune_amt': 0.25} ===
+  ep 1/5  train_loss=0.2710  ep 2/5  train_loss=0.0493  ep 3/5  train_loss=0.0283  ep 4/5  train_loss=0.0187  ep 5/5  train_loss=0.0106→ acc=0.9872 | loss=0.044 | flops=12.3 M | lat 2.2 ms
