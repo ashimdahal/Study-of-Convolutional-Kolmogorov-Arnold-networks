@@ -10,10 +10,13 @@ import torch, torch.nn as nn
 from torch.utils.data import DataLoader
 from torchvision import datasets, transforms
 import torch.backends.cudnn as cudnn
+import torch.nn.utils.prune as prune
 
-from ptflops import get_model_complexity_info           # pip install ptflops
+from ptflops import get_model_complexity_info           
 from tqdm import tqdm
 import matplotlib.pyplot as plt
+from torchinfo import summary
+from thop import profile
 
 # -------  adjust import to your folder layout -----------------------------
 from kan_convs import FastKANConv2DLayer
@@ -22,7 +25,7 @@ from kan_convs import FastKANConv2DLayer
 
 # ------------------------------ Model --------------------------------------
 class LeNet5_KAN(nn.Module):
-    """LeNet-5 skeleton but with FastKANConvNDLayer blocks."""
+    """LeNet-5 skeleton but with FastKANConv2DLayer blocks."""
     def __init__(self, num_classes=10, grid_size=8, width_mult=1.0, use_relu=True):
         super().__init__()
         Act = nn.ReLU if use_relu else nn.Identity
@@ -53,7 +56,7 @@ class LeNet5_KAN(nn.Module):
 
         self.classifier = nn.Sequential(
             nn.Flatten(),
-            nn.Linear(c2 * 4 * 4, 120),
+            nn.LazyLinear(120),
             Act(),
             nn.Linear(120, 84),
             Act(),
@@ -67,27 +70,46 @@ class LeNet5_KAN(nn.Module):
 
 
 # ---------------------------- utils ----------------------------------------
-def apply_prune(model: nn.Module, amount: float):
-    """Channel-wise structured pruning on FastKAN layers."""
+
+def apply_prune(model: nn.Module, amount: float = 0.25):
+    """
+    Structured L2-norm pruning on the output channels of each Conv inside
+    FastKANConv2DLayer.  Skips everything if amount == 0.
+    """
     if amount < 1e-6:
         return model
-    import torch.nn.utils.prune as prune
-    for m in model.modules():
-        if isinstance(m, FastKANConvNDLayer):
-            prune.ln_structured(m, name="weight", amount=amount, n=2, dim=0)
+
+    for mod in model.modules():
+        if isinstance(mod, FastKANConv2DLayer):
+            # prune every underlying Conv2d in both lists
+            for conv in list(mod.base_conv) + list(mod.spline_conv):
+                prune.ln_structured(conv, name="weight",
+                                    amount=amount, n=2, dim=0)
     return model
 
+def safe_model_metrics(model, input_size=(1, 32, 32), device="cuda"):
+    """Return (params, flops) – flops may be None if THOP fails."""
+    # 1 – parameter count via torchinfo (always works)
+    info = summary(model, input_size=(1, *input_size), verbose=0, depth=0)
+    params = info.total_params
+
+    # 2 – FLOPs via thop (robust to unknown layers: it skips them)
+    try:
+        dummy = torch.randn(1, *input_size).to(device)
+        flops, _ = profile(model, inputs=(dummy,), verbose=False)
+    except Exception as e:
+        print(f"[warn] THOP failed to compute FLOPs: {e}")
+        flops = None
+    return params, flops
 
 def ptq_int8(model: nn.Module, example_inp: torch.Tensor):
     """Post-training static INT8 quantisation (simple, fx-graph-mode)."""
-    import torch.ao.quantization as tq
     model_cpu = model.cpu().eval()
-    model_prepared = tq.prepare_fx(model_cpu, {"": torch.ao.quantization.default_qconfig})
+    qconfig_map = get_default_qconfig_mapping("fbgemm")
+    prepared    = prepare_fx(model_cpu, qconfig_map, (example_inp,))
     with torch.inference_mode():
-        model_prepared(example_inp)
-    model_int8 = tq.convert_fx(model_prepared)
-    return model_int8
-
+        prepared(example_inp)          # one calibration batch is enough
+    return convert_fx(prepared).to(example_inp.device)
 
 def measure_latency(model, device, reps=50):
     model.eval()
@@ -147,7 +169,7 @@ GRID = {
     "width_mult": [1.0, 1.5],
     "use_relu":   [True, False],
     "prune_amt":  [0.0, 0.25],
-    "quant":      ["fp32", "int8"]
+    # "quant":      ["fp32", "int8"]
 }
 
 
@@ -169,6 +191,10 @@ def main():
     train_loader, test_loader = get_loaders()
     loss_fn = nn.CrossEntropyLoss()
 
+    # after train/val loaders are built
+    calib_batch, _ = next(iter(train_loader))
+    calib_tensor = calib_batch[:32].to(device)   # 32 samples
+
     for ix, combo in enumerate(itertools.product(*GRID.values())):
         cfg = dict(zip(GRID.keys(), combo))
         tag = "_".join(f"{k}{v}" for k, v in cfg.items() if k != "use_relu")
@@ -182,16 +208,12 @@ def main():
         model = apply_prune(model, cfg["prune_amt"])
 
         # quick flop/param count
-        macs, params = get_model_complexity_info(
-            model, (1, 32, 32), print_per_layer_stat=True, as_strings=False
-        )
-        flops = macs * 2    # ptflops returns MACs; FLOPs ≈ 2*MACs
+        params, flops = safe_model_metrics(model, device=device)
 
-        # quantisation (after pruning, before training for simplicity)
-        if cfg["quant"] == "int8":
-            model_fp32 = model
-            model = ptq_int8(model_fp32, torch.randn(1, 1, 32, 32))
-            model.to(device)
+        # # then later
+        # if cfg["quant"] == "int8":
+        #     model = ptq_int8(model, calib_tensor)
+
 
         opt = torch.optim.Adam(model.parameters(), lr=1e-3)
         # ---- train --------------------------------------------------------
@@ -206,6 +228,7 @@ def main():
             **cfg,
             "val_loss": val_loss,
             "val_acc":  val_acc,
+            "params": params,
             "flops":    flops,
             "params":   params,
             "latency":  latency
@@ -238,11 +261,11 @@ def main():
     plt.savefig(f"{args.outdir}/acc_vs_grid.pdf")
 
     # 2. speed-up chart (latency vs. flops)
-    fig = plt.figure(figsize=(5,4))
-    for q in ("fp32","int8"):
-        xs = [r["flops"]/1e6 for r in results if r["quant"]==q]
-        ys = [r["latency"]*1000 for r in results if r["quant"]==q]
-        plt.scatter(xs, ys, label=q, alpha=0.7)
+    # fig = plt.figure(figsize=(5,4))
+    # for q in ("fp32","int8"):
+    #     xs = [r["flops"]/1e6 for r in results if r["quant"]==q]
+    #     ys = [r["latency"]*1000 for r in results if r["quant"]==q]
+    #     plt.scatter(xs, ys, label=q, alpha=0.7)
     plt.xlabel("FLOPs (M)")
     plt.ylabel("Latency (ms, batch=32)")
     plt.xscale("log"); plt.yscale("log")
