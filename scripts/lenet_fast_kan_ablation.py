@@ -30,10 +30,10 @@ class LeNet5_KAN(nn.Module):
 
         self.layer1 = nn.Sequential(
             FastKANConv2DLayer(
-                conv_class=None, norm_class=None,  # unused in the public impl
+                # conv_class=None, norm_class=None,  # unused in the public impl
                 input_dim=1, output_dim=c1,
                 kernel_size=5, stride=1, padding=0,
-                ndim=2, grid_size=grid_size
+                grid_size=grid_size
             ),
             nn.BatchNorm2d(c1),
             Act(),
@@ -41,10 +41,10 @@ class LeNet5_KAN(nn.Module):
         )
         self.layer2 = nn.Sequential(
             FastKANConv2DLayer(
-                conv_class=None, norm_class=None,
+                # conv_class=None, norm_class=None,
                 input_dim=c1, output_dim=c2,
                 kernel_size=5, stride=1, padding=0,
-                ndim=2, grid_size=grid_size,
+                grid_size=grid_size,
             ),
             nn.BatchNorm2d(c2),
             Act(),
@@ -108,8 +108,8 @@ def get_loaders(batch=512):
         transforms.ToTensor(),
         transforms.Normalize((0.13,), (0.308,))
     ])
-    train_ds = datasets.MNIST("./mnist", True, download=True, transform=tfm)
-    test_ds  = datasets.MNIST("./mnist", False, download=True, transform=tfm)
+    train_ds = datasets.MNIST(root="./mnist/train", train=True, download=False, transform=tfm)
+    test_ds = datasets.MNIST(root="./mnist/test", train=False, download=False, transform=tfm)
     train_loader = DataLoader(train_ds, batch_size=batch, shuffle=True, num_workers=4, pin_memory=True)
     test_loader  = DataLoader(test_ds,  batch_size=batch*2, shuffle=False, num_workers=4, pin_memory=True)
     return train_loader, test_loader
@@ -183,7 +183,7 @@ def main():
 
         # quick flop/param count
         macs, params = get_model_complexity_info(
-            model, (1, 32, 32), print_per_layer_stat=False, as_strings=False
+            model, (1, 32, 32), print_per_layer_stat=True, as_strings=False
         )
         flops = macs * 2    # ptflops returns MACs; FLOPs ≈ 2*MACs
 
